@@ -198,7 +198,7 @@ function del(id){
     var del = sql.query("delete from user where id="+id);
 }
 
-HTML :
+SISANYA MIKIR TOLOLS:
 
 <input type="text" placeholder="Nama" id="nama"><br>
 <input type="text" placeholder="Umur" id="umur"><br>
