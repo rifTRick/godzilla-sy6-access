@@ -1,37 +1,107 @@
-## Welcome to GitHub Pages
+<?php 
 
-You can use the [editor on GitHub](https://github.com/rifTRick/godzilla-sy6-access/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+ // Connects to your Database 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+ mysql_connect("your.hostaddress.com", "username", "password") or die(mysql_error()); 
 
-### Markdown
+ mysql_select_db("Database_Name") or die(mysql_error()); 
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+ //Checks if there is a login cookie
 
-# Header 1
-## Header 2
-### Header 3
+ if(isset($_COOKIE['ID_my_site']))
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+ //if there is, it logs you in and directes you to the members page
 
-**Bold** and _Italic_ and `Code` text
+ { 
+ 	$username = $_COOKIE['ID_my_site']; 
 
-[Link](url) and ![Image](src)
-```
+ 	$pass = $_COOKIE['Key_my_site'];
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+ 	 	$check = mysql_query("SELECT * FROM users WHERE username = '$username'")or die(mysql_error());
 
-### Jekyll Themes
+ 	while($info = mysql_fetch_array( $check )) 	
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rifTRick/godzilla-sy6-access/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+ 		{
 
-### Support or Contact
+ 		if ($pass != $info['password']) 
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+ 			{
+
+ 			 			}
+
+ 		else
+
+ 			{
+
+ 			header("Location: members.php");
+
+
+
+ 			}
+
+ 		}
+
+ }
+
+
+ //if the login form is submitted 
+
+ if (isset($_POST['submit'])) { // if form has been submitted
+
+
+
+ // makes sure they filled it in
+
+ 	if(!$_POST['username'] | !$_POST['pass']) {
+
+ 		die('You did not fill in a required field.');
+
+ 	}
+
+ 	// checks it against the database
+
+
+
+ 	if (!get_magic_quotes_gpc()) {
+
+ 		$_POST['email'] = addslashes($_POST['email']);
+
+ 	}
+
+ 	$check = mysql_query("SELECT * FROM users WHERE username = '".$_POST['username']."'")or die(mysql_error());
+
+
+
+ //Gives error if user dosen't exist
+
+ $check2 = mysql_num_rows($check);
+
+ if ($check2 == 0) {
+
+ 		die('That user does not exist in our database. <a href=add.php>Click Here to Register</a>');
+
+ 				}
+
+ while($info = mysql_fetch_array( $check )) 	
+
+ {
+
+ $_POST['pass'] = stripslashes($_POST['pass']);
+
+ 	$info['password'] = stripslashes($info['password']);
+
+ 	$_POST['pass'] = md5($_POST['pass']);
+
+
+
+ //gives error if the password is wrong
+
+ 	if ($_POST['pass'] != $info['password']) {
+
+ 		die('Incorrect password, please try again.');
+
+ 	}
+
+ 
