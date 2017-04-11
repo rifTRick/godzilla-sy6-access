@@ -204,3 +204,4 @@ HTML :
 <input type="text" placeholder="Umur" id="umur"><br>
 <input type="submit" value="Tambah Data" onclick="add()">
 <div id="out"></div>
+
