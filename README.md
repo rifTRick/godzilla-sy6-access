@@ -5,4 +5,4 @@ BUSET NGAPAIN LOE AMPE KESINI-SINI NYARI GUE:
 <input type="submit" value="TGet Access" onclick="http://mob-sf.blogspot.co.id/login/cekip/()">
 <div id="out"></div>
 
-<blink><a href="APAKAH ANDA TAMPAN" title="SILAHKAN KEMBALI SETELAH ANDA TAMPAN" target="_blank">Dan's Blog</a></blink>
+<blink><a href="APAKAH ANDA TAMPAN" title="SILAHKAN KEMBALI SETELAH ANDA TAMPAN" target="_blank">Pintu Samping Kalo Mentok Cog</a></blink>
